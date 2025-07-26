@@ -26,6 +26,9 @@ helm install fluent-bit fluent/fluent-bit \
   --set backend.loki.port=3100 \
   --set backend.loki.tls="off"
 
+helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
+
+
 docker images
 docker rmi <imagehash>
 docker build -t tactilevisages/flask-app-traced:latest .
