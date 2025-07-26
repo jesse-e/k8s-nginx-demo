@@ -5,8 +5,9 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: flask
+    app: flask-app
   ports:
     - protocol: TCP
       port: 80            # Port exposed externally (NodePort maps to this)
-      targetPort: 5000    # Port your Flask app is running on inside the pod
+      targetPort: 80    # Port your Flask app is running on inside the pod
+      nodePort: 30629

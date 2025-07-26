@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask
+      app: flask-app
   template:
     metadata:
       labels:
-        app: flask
+        app: flask-app
     spec:
       containers:
-      - name: flask-container
-        image: flask-app:local              # <- Local image name
-        imagePullPolicy: Never              # <- Tell K8s not to pull from registry
-        ports:
-        - containerPort: 5000
+        - name: flask-app
+          image: tactilevisages/flask-app-traced:latest
+          imagePullPolicy: Always  # or Always if you want to always pull latest
+          ports:
+            - containerPort: 80
