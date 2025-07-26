@@ -1,0 +1,183 @@
+COMPUTED VALUES:
+affinity: {}
+annotations: {}
+config: |
+  memberlist:
+    cluster_label: "{{ .Release.Name }}.{{ .Release.Namespace }}"
+  multitenancy_enabled: {{ .Values.tempo.multitenancyEnabled }}
+  usage_report:
+    reporting_enabled: {{ .Values.tempo.reportingEnabled }}
+  compactor:
+    compaction:
+      block_retention: {{ .Values.tempo.retention }}
+  distributor:
+    receivers:
+      {{- toYaml .Values.tempo.receivers | nindent 8 }}
+  ingester:
+    {{- toYaml .Values.tempo.ingester | nindent 6 }}
+  server:
+    {{- toYaml .Values.tempo.server | nindent 6 }}
+  storage:
+    {{- toYaml .Values.tempo.storage | nindent 6 }}
+  querier:
+    {{- toYaml .Values.tempo.querier | nindent 6 }}
+  query_frontend:
+    {{- toYaml .Values.tempo.queryFrontend | nindent 6 }}
+  overrides:
+    {{- toYaml .Values.tempo.overrides | nindent 6 }}
+    {{- if .Values.tempo.metricsGenerator.enabled }}
+  metrics_generator:
+        storage:
+          path: "/tmp/tempo"
+          remote_write:
+            - url: {{ .Values.tempo.metricsGenerator.remoteWriteUrl }}
+        traces_storage:
+          path: "/tmp/traces"
+    {{- end }}
+extraLabels: {}
+extraVolumes: []
+fullnameOverride: ""
+global:
+  commonLabels: {}
+hostAliases: []
+labels: {}
+nameOverride: ""
+networkPolicy:
+  allowExternal: true
+  egress:
+    blockDNSResolution: false
+    enabled: false
+    ports: []
+    to: []
+  enabled: false
+  explicitNamespacesSelector: {}
+  ingress: true
+nodeSelector: {}
+persistence:
+  accessModes:
+  - ReadWriteOnce
+  enableStatefulSetAutoDeletePVC: false
+  enabled: false
+  size: 10Gi
+podAnnotations: {}
+podLabels: {}
+priorityClassName: null
+replicas: 1
+securityContext:
+  fsGroup: 10001
+  runAsGroup: 10001
+  runAsNonRoot: true
+  runAsUser: 10001
+service:
+  annotations: {}
+  clusterIP: ""
+  labels: {}
+  loadBalancerIP: null
+  protocol: TCP
+  targetPort: ""
+  type: ClusterIP
+serviceAccount:
+  annotations: {}
+  automountServiceAccountToken: true
+  create: true
+  imagePullSecrets: []
+  labels: {}
+  name: null
+serviceMonitor:
+  additionalLabels: {}
+  annotations: {}
+  enabled: false
+  interval: ""
+tempo:
+  extraArgs: {}
+  extraEnv: []
+  extraEnvFrom: []
+  extraVolumeMounts: []
+  ingester: {}
+  livenessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /ready
+      port: 3200
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  memBallastSizeMbs: 1024
+  metricsGenerator:
+    enabled: true
+    remoteWriteUrl: http://prometheus.monitoring:9090/api/v1/write
+  multitenancyEnabled: false
+  overrides:
+    defaults: {}
+    per_tenant_override_config: /conf/overrides.yaml
+  per_tenant_overrides: {}
+  pullPolicy: IfNotPresent
+  querier: {}
+  queryFrontend: {}
+  readinessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /ready
+      port: 3200
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  receivers:
+    jaeger:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:14250
+        thrift_binary:
+          endpoint: 0.0.0.0:6832
+        thrift_compact:
+          endpoint: 0.0.0.0:6831
+        thrift_http:
+          endpoint: 0.0.0.0:14268
+    opencensus: null
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+  reportingEnabled: true
+  repository: grafana/tempo
+  resources: {}
+  retention: 24h
+  securityContext: {}
+  server:
+    http_listen_port: 3200
+  storage:
+    trace:
+      backend: local
+      local:
+        path: /var/tempo/traces
+      wal:
+        path: /var/tempo/wal
+  tag: ""
+  updateStrategy: RollingUpdate
+tempoQuery:
+  enabled: false
+  extraArgs: {}
+  extraEnv: []
+  extraVolumeMounts: []
+  ingress:
+    annotations: {}
+    enabled: false
+    extraPaths: []
+    hosts:
+    - query.tempo.example.com
+    labels: {}
+    path: /
+    pathType: Prefix
+    tls: []
+  pullPolicy: IfNotPresent
+  repository: grafana/tempo-query
+  resources: {}
+  securityContext: {}
+  service:
+    port: 16686
+  tag: null
+tolerations: []
