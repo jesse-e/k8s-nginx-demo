@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.60.2
-    chart: grafana
+    repoURL: https://github.com/jesse-e/k8s-nginx-demo.git
+    targetRevision: main
+    path: charts/grafana
     helm:
       valueFiles:
-        - monitoring/grafana/values.yaml
+        - ../../monitoring/grafana/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

@@ -39,3 +39,11 @@ minikube ip
 
 kubectl delete deployment flask-app
 kubectl delete service flask-service
+
+kubectl config get-contexts
+to switch
+kubectl config use-context minikube
+
+
+kubectl -n argocd get secret argocd-initial-admin-secret \
+  -o jsonpath="{.data.password}" | base64 -d; echo
