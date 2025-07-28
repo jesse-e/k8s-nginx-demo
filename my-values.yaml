@@ -1,0 +1,42 @@
+# my-values.yaml
+alertmanager:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+
+pushgateway:
+  enabled: false
+
+server:
+  enabled: true
+  global:
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    evaluation_interval: 15s
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  persistentVolume:
+    enabled: false  # For dev. Use true in production.
+  retention: "2d"
+  service:
+    type: NodePort
+    nodePort: 30090
+
+rbac:
+  create: true
+
+serviceAccounts:
+  server:
+    create: true
+
+# Scrape configuration
+additionalScrapeConfigs:
+  - job_name: 'flask-app'
+    static_configs:
+      - targets: ['flask-service.default.svc.cluster.local:5000']
