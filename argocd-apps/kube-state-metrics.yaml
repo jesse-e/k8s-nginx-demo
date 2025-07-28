@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: kube-state-metrics
 spec:
   destination:
     namespace: monitoring
@@ -9,9 +9,9 @@ spec:
   project: default
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    chart: prometheus
-    targetRevision: 25.21.0
+    chart: kube-state-metrics
+    targetRevision: 5.12.0
     helm:
-      values: monitoring/prometheus/values.yaml
+      values: monitoring/kube-state-metrics/values.yaml
   syncPolicy:
     automated: {}
