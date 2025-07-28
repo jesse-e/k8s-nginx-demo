@@ -47,3 +47,17 @@ kubectl config use-context minikube
 
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d; echo
+
+
+ eks-cluster-terraform % eksctl create cluster \
+  --name eks-monitoring-cluster \
+  --region us-west-2 \
+  --zones us-west-2a,us-west-2b,us-west-2c \
+  --nodegroup-name default-ng \
+  --node-type t3.medium \
+  --nodes 2 \
+  --managed \
+  --with-oidc \
+  --tags Environment=dev
+
+kubectl get pods -n monitoring -o wide
