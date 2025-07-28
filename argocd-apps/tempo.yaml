@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 1.23.2
-    chart: tempo
+    repoURL: https://github.com/jesse-e/k8s-nginx-demo.git
+    targetRevision: main
+    path: charts/loki-stack
     helm:
       valueFiles:
-        - monitoring/tempo/values.yaml
+        - ../../monitoring/loki/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

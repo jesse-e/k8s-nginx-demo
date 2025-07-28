@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    targetRevision: 0.129.0
-    chart: opentelemetry-collector
+    repoURL: https://github.com/jesse-e/k8s-nginx-demo.git
+    targetRevision: main
+    path: charts/loki-stack
     helm:
       valueFiles:
-        - monitoring/otel/values.yaml
+        - ../../monitoring/loki/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
