@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://github.com/jesse-e/k8s-nginx-demo.git
     targetRevision: main
-    path: charts/loki-stack
+    path: charts/kube-prometheus-stack
     helm:
       valueFiles:
-        - ../../monitoring/loki/values.yaml
+        - ../../monitoring/prometheus/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
