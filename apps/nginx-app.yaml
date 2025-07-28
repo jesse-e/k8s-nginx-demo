@@ -1,16 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: nginx
+  namespace: argocd  # or "default" if you're not using a separate ArgoCD namespace
 spec:
+  project: default
   source:
-    repoURL: https://github.com/your-org/k8s-demo
+    repoURL: https://github.com/jesse-e/k8s-nginx-demo.git
     targetRevision: main
     path: nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: default
-  project: default
   syncPolicy:
     automated:
       prune: true

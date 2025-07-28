@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-org/k8s-demo
+    repoURL: https://github.com/jesse-e/k8s-nginx-demo.git
     targetRevision: main       # or development, depending on your flow
-    path: flask-app            # 👈 this matches the folder inside your repo
+    path: flask-app            # this matches the folder inside your repo
   destination:
     server: https://kubernetes.default.svc
     namespace: default         # where you want this app deployed
