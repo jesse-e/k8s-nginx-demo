@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: tactilevisages/flask-app-traced:amd64
+          image: tactilevisages/flask-app-traced:latest
           imagePullPolicy: Always  # or Always if you want to always pull latest
           ports:
             - containerPort: 80
