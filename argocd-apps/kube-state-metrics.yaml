@@ -13,6 +13,7 @@ spec:
     chart: kube-state-metrics
     targetRevision: 5.12.0
     helm:
-      values: monitoring/kube-state-metrics/values.yaml
+      values: |
+        replicaCount: 1
   syncPolicy:
     automated: {}

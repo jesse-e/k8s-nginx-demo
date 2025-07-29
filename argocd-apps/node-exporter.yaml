@@ -13,6 +13,8 @@ spec:
     chart: prometheus-node-exporter
     targetRevision: 4.27.0
     helm:
-      values: monitoring/node-exporter/values.yaml
+      values: |
+        rbac:
+          create: true
   syncPolicy:
     automated: {}
