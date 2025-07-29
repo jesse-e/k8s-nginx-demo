@@ -61,3 +61,6 @@ kubectl -n argocd get secret argocd-initial-admin-secret \
   --tags Environment=dev
 
 kubectl get pods -n monitoring -o wide
+
+get pw
+kubectl get secret -n monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
