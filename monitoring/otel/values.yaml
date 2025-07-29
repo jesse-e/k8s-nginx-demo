@@ -1,4 +1,3 @@
-COMPUTED VALUES:
 additionalLabels: {}
 affinity: {}
 alternateConfig: {}
@@ -15,7 +14,7 @@ clusterRole:
   clusterRoleBinding:
     annotations: {}
     name: ""
-  create: false
+  create: true
   name: ""
   rules: []
 command:
@@ -182,7 +181,7 @@ ports:
     servicePort: 14268
   metrics:
     containerPort: 8888
-    enabled: false
+    enabled: true
     protocol: TCP
     servicePort: 8888
   otlp:
