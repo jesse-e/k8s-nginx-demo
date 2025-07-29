@@ -15,6 +15,9 @@ serviceAccounts:
     name: ""
     annotations: {}
 
+nodeExporter:
+  enabled: false
+
 ## Monitors ConfigMap changes and POSTs to a URL
 ## Ref: https://github.com/jimmidyson/configmap-reload
 ##
